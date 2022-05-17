@@ -1,4 +1,6 @@
 import requests
+import colorama
+from colorama import Back, Fore, Style
 from bs4 import BeautifulSoup
 
 #   Loading the webpage content
@@ -10,9 +12,15 @@ frostDragonBones_page = requests.get("https://runescape.wiki/w/Frost_dragon_bone
 runeGoldberg_wiki = BeautifulSoup(runeGoldberg_page.content, "html.parser")
 wiki_table = runeGoldberg_wiki.find_all('table', class_="wikitable")
 
+
+#   Displaying the title in color
+colorama.init(autoreset=True)
+print(Fore.RED + "~~~~~ Runescape 3 Information ~~~~~")
+
+
 #   Getting Today's date
 date = wiki_table[0].td.next
-print("Date: " + date)
+print("\t   " + Fore.LIGHTGREEN_EX + date + "\n")
 
 #   RuneGoldberg Machine & Finding 1st Rune Slot
 slot1 = wiki_table[0].a.next.next.next
@@ -35,8 +43,8 @@ slot2_rune3 = slot2_three.contents[0]
 print("Slot 2 (Option 3): " + slot2_rune3)
 
 
-
 #TODO: Get prices of big ticket items
 #TODO: Show the change in prices from the last time it was ran (save to a text file)
 
 
+input('Press ENTER to exit')
